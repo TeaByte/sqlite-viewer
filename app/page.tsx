@@ -33,8 +33,8 @@ export default function Home() {
       {selectedDataBase ? (
         <Load path={selectedDataBase} />
       ) : (
-        <button className="p-2 bg-slate-500" onClick={onClick}>
-          Upload
+        <button className="p-4 bg-primary text-background" onClick={onClick}>
+          Select Database
         </button>
       )}
     </main>

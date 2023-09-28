@@ -16,13 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { ArrowDownIcon } from "@radix-ui/react-icons";
-
-interface StructureProps {
-  tablesInfo: TableInfos;
-}
-
-export default function Structure({ tablesInfo }: StructureProps) {
+export default function Structure({ tablesInfo }: { tablesInfo: TableInfos }) {
   return (
     <div className="w-full">
       <Accordion type="single" collapsible className="w-full">
@@ -32,7 +26,6 @@ export default function Structure({ tablesInfo }: StructureProps) {
               <AccordionTrigger className="font-bold p-2 bg-secondary opacity-70 flex gap-1 items-center">
                 {table}
               </AccordionTrigger>
-
               <AccordionContent>
                 <Table>
                   <TableHeader>

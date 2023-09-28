@@ -1,5 +1,5 @@
-use rusqlite::{Connection};
 use rusqlite::types::Value;
+use rusqlite::Connection;
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
@@ -28,10 +28,11 @@ impl DataBase {
     }
 
     pub fn get_tables(&self) -> Vec<String> {
-        let mut stmt = self.connection
-        .prepare("SELECT name FROM sqlite_master WHERE type='table'")
-        .expect("Failed to prepare query");
-    
+        let mut stmt = self
+            .connection
+            .prepare("SELECT name FROM sqlite_master WHERE type='table'")
+            .expect("Failed to prepare query");
+
         let tables_names: Vec<String> = stmt
             .query_map([], |row| Ok(row.get(0)?))
             .expect("Failed to get tables from database")
@@ -42,19 +43,22 @@ impl DataBase {
     }
 
     pub fn get_table_info(&self, table_name: &String) -> Vec<TableInfo> {
-        let mut stmt = self.connection
+        let mut stmt = self
+            .connection
             .prepare(&format!("PRAGMA table_info({})", table_name))
             .expect("Failed to prepare query");
 
         let table_info: Vec<TableInfo> = stmt
-            .query_map([], |row| Ok(TableInfo {
-                cid: row.get(0)?,
-                name: row.get(1)?,
-                r#type: row.get(2)?,
-                notnull: row.get(3)?,
-                dflt_value: row.get(4)?,
-                pk: row.get(5)?,
-            }))
+            .query_map([], |row| {
+                Ok(TableInfo {
+                    cid: row.get(0)?,
+                    name: row.get(1)?,
+                    r#type: row.get(2)?,
+                    notnull: row.get(3)?,
+                    dflt_value: row.get(4)?,
+                    pk: row.get(5)?,
+                })
+            })
             .expect("Failed to get table info from database")
             .map(|result| result.unwrap())
             .collect();
@@ -64,23 +68,22 @@ impl DataBase {
 
     pub fn get_column(&self, table_name: &str, column_name: &str) -> Vec<Value> {
         let mut stmt = self
-        .connection
-        .prepare(&format!("SELECT {} FROM {}", column_name, table_name))
-        .expect("Failed to prepare fetch query");
+            .connection
+            .prepare(&format!("SELECT {} FROM {}", column_name, table_name))
+            .expect("Failed to prepare fetch query");
 
-    let results: Vec<Value> = stmt
-        .query_map([], |row| {
-            let value = row.get(0)?;
-            Ok(value)
-        })
-        .expect("Failed to execute query")
-        .map(|result| result.unwrap())
-        .collect();
+        let results: Vec<Value> = stmt
+            .query_map([], |row| {
+                let value = row.get(0)?;
+                Ok(value)
+            })
+            .expect("Failed to execute query")
+            .map(|result| result.unwrap())
+            .collect();
 
-    results
+        results
     }
 }
-
 
 /// Convert Value to String
 pub fn convert(value: Value) -> String {

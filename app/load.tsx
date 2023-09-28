@@ -82,7 +82,7 @@ export default function Load({ path }: { path: string }) {
           />
         </TabsContent>
         <TabsContent value="execute">
-          <h1>execute</h1>
+          <h1>Not implemented yet!</h1>
         </TabsContent>
       </Tabs>
     </div>

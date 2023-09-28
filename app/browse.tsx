@@ -32,24 +32,26 @@ export default function Browse(props: BrowseProps) {
   return (
     <div className="w-full">
       <div className="px-2">
-        <Select
-          //   value={tables[0]}
-          onValueChange={(table: string) => setSelectedTable(table)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select Table" />
-          </SelectTrigger>
-          <SelectContent className="h-[150px] overflow-y-auto">
-            <SelectGroup>
-              <SelectLabel>Select Table</SelectLabel>
-              {tables.map((table, index) => (
-                <SelectItem value={table} key={index}>
-                  {table}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        {selectedTable && (
+          <Select
+            value={selectedTable}
+            onValueChange={(table: string) => setSelectedTable(table)}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Table" />
+            </SelectTrigger>
+            <SelectContent className="h-[150px] overflow-y-auto">
+              <SelectGroup>
+                <SelectLabel>Select Table</SelectLabel>
+                {tables.map((table, index) => (
+                  <SelectItem value={table} key={index}>
+                    {table}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        )}
       </div>
       <div className="mt-3 h-[420px] overflow-auto">
         {selectedTable && records[selectedTable] && (
