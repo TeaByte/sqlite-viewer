@@ -31,4 +31,4 @@ SQLite Viewer GUI Program written in Rust using Tauri + NextJS
 
 ##
 
-![photo](https://srv2.imgonline.com.ua/result_img/imgonline-com-ua-twotoone-77HXRnGZ6H1cqsD1.jpg)
+![photo](https://imgtr.ee/images/2023/09/28/03a88aef88d52e28852a7ec3db4e0cab.jpeg)
