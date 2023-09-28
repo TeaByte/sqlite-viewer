@@ -1,8 +1,9 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use lazy_static::lazy_static;
-use std::sync::Mutex;
+use std::{sync::Mutex, collections::HashMap};
 
+use serde::Serialize;
 mod database;
 use database::{convert, DataBase, TableInfo};
 
@@ -16,7 +17,8 @@ fn main() {
             change_database_path,
             get_tables,
             get_table_info,
-            get_column
+            get_column,
+            execute
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -54,4 +56,20 @@ fn get_column(table_name: String, column_name: String) -> Vec<String> {
         }
     };
     records
+}
+
+#[derive(Debug, Serialize)]
+pub struct Execute {
+    result: Result<Vec<HashMap<String, String>>, String>
+}
+
+#[tauri::command]
+fn execute(sql: String) -> Execute  {
+    if let Some(db) = DB_INSTANCE.lock().unwrap().as_ref() {
+        return match db.execute(&sql) {
+            Ok(d) => Execute{ result: Ok(d) },
+            Err(e) => Execute{ result: Err(e.to_string()) }
+        };
+    };
+    Execute{ result: Err("Error".to_string()) }
 }

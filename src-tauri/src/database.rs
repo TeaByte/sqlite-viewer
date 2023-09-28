@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use rusqlite::types::Value;
 use rusqlite::Connection;
 use serde::Serialize;
@@ -23,9 +24,9 @@ impl DataBase {
         }
     }
 
-    pub fn connection(&self) -> &Connection {
-        &self.connection
-    }
+    // pub fn connection(&self) -> &Connection {
+    //     &self.connection
+    // }
 
     pub fn get_tables(&self) -> Vec<String> {
         let mut stmt = self
@@ -83,9 +84,30 @@ impl DataBase {
 
         results
     }
+
+    pub fn execute(&self, sql: &str) -> Result<Vec<HashMap<String, String>>, rusqlite::Error> {
+        let mut result = Vec::new();
+        let mut stmt = self.connection.prepare(sql)?;
+        let column_names: Vec<String> = stmt.column_names().into_iter().map(|s| s.to_string()).collect();
+        let rows = stmt.query_map([], |row| {
+            let mut columns = HashMap::new();
+            for (index, name) in column_names.iter().enumerate() {
+                let value: Option<Value> = row.get(index).ok();
+                if let Some(value) = value {
+                    columns.insert(name.clone(), convert(value));
+                }
+            }
+            Ok(columns)
+        })?;
+    
+        for row in rows {
+            result.push(row?);
+        }
+        Ok(result)
+    }
 }
 
-/// Convert Value to String
+
 pub fn convert(value: Value) -> String {
     match value {
         Value::Null => String::from("Null"),

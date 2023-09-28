@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 
 import { invoke } from "@tauri-apps/api/tauri";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import Browse from "./browse";
 import Structure from "./structure";
+import ExecuteSQL from "./execute";
 
 export default function Load({ path }: { path: string }) {
   const [records, setRecords] = useState<Columns>({});
@@ -82,7 +84,7 @@ export default function Load({ path }: { path: string }) {
           />
         </TabsContent>
         <TabsContent value="execute">
-          <h1>Not implemented yet!</h1>
+          <ExecuteSQL table={tables[0]} />
         </TabsContent>
       </Tabs>
     </div>
