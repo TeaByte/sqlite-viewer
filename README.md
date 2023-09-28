@@ -4,6 +4,7 @@ SQLite Viewer GUI Program written in Rust using Tauri + NextJS
 
 - [ ] Render performance for big sqlite files
 - [ ] Execute SQL command tab
+- [ ] Schema Generator
 - [ ] Add themes
 
 ##
@@ -27,5 +28,7 @@ SQLite Viewer GUI Program written in Rust using Tauri + NextJS
    ```sh
    cargo tauri dev
    ```
+
+##
 
 ![photo](https://srv2.imgonline.com.ua/result_img/imgonline-com-ua-twotoone-77HXRnGZ6H1cqsD1.jpg)
