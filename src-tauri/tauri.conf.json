@@ -6,7 +6,7 @@
     "distDir": "../out"
   },
   "package": {
-    "productName": "Rust SQLite Viewer",
+    "productName": "SQLite Viewer",
     "version": "0.1.0"
   },
   "tauri": {
@@ -36,7 +36,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "sqlite.com.dev",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -66,7 +66,7 @@
         "height": 600,
         "maxHeight": 600,
         "resizable": true,
-        "title": "Rust SQLite Viewer",
+        "title": "SQLite Viewer",
         "width": 800,
         "minWidth": 800
       }
