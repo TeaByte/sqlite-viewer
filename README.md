@@ -12,8 +12,8 @@ SQLite Viewer GUI Program written in Rust using Tauri + NextJS
 1. **Clone the Repository**
 
    ```sh
-   git clone https://github.com/TeaByte/mt-uploader.git
-   cd mt-uploader
+   git clone https://github.com/TeaByte/sqlite-viewer.git
+   cd sqlite-viewer
    ```
 
 2. **Install Dependencies**
