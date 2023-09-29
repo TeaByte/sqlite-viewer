@@ -31,6 +31,10 @@ SQLite Viewer GUI Program written in Rust using Tauri + NextJS
 
 ![photo](https://i.ibb.co/Xtb0pZT/error.png)
 
+**5- Light and Dark mode**
+
+![photo](https://i.ibb.co/XpC9Mwm/image.png)
+
 ##
 
 1. **Clone the Repository**
