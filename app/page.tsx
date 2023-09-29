@@ -29,7 +29,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col">
       {selectedDataBase ? (
         <Load path={selectedDataBase} />
       ) : (

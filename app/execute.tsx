@@ -1,6 +1,8 @@
 "use client";
 
-import { TableInfos } from "@/types";
+import { invoke } from "@tauri-apps/api/tauri";
+import React, { useState } from "react";
+
 import {
   Table,
   TableBody,
@@ -9,21 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
 import { Textarea } from "@/components/ui/textarea";
-
-import { invoke } from "@tauri-apps/api/tauri";
-import React, { useState } from "react";
-
-type x =
-  | { result: { Ok: Array<{ [key: string]: string }> } }
-  | { result: { Err: string } };
 
 export default function ExecuteSQL({ table }: { table: string }) {
   const [sql, setSQL] = useState("");
@@ -68,28 +56,28 @@ export default function ExecuteSQL({ table }: { table: string }) {
         {typeof result === "string" ? (
           <p>{result}</p>
         ) : result instanceof Array ? (
-          <table className="table-auto">
-            <thead>
-              <tr>
+          <Table className="table-auto">
+            <TableHeader>
+              <TableRow>
                 {Object.keys(result[0]).map((key) => (
-                  <th key={key} className="border px-4 py-2">
+                  <TableHead key={key} className="border px-4 py-2">
                     {key}
-                  </th>
+                  </TableHead>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {result.map((row, index) => (
-                <tr key={index}>
+                <TableRow key={index}>
                   {Object.values(row).map((value, index) => (
-                    <td key={index} className="border px-4 py-2">
+                    <TableCell key={index} className="border px-4 py-2">
                       {value}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         ) : null}
       </form>
     </div>

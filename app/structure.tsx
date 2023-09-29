@@ -35,6 +35,7 @@ export default function Structure({ tablesInfo }: { tablesInfo: TableInfos }) {
                       <TableHead>NotNull</TableHead>
                       <TableHead>Default Value</TableHead>
                       <TableHead>Primary Key</TableHead>
+                      <TableHead>Schema</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -53,6 +54,9 @@ export default function Structure({ tablesInfo }: { tablesInfo: TableInfos }) {
                           {tableInfo.dflt_value ? tableInfo.dflt_value : "None"}
                         </TableCell>
                         <TableCell>{tableInfo.pk ? "Yes" : "No"}</TableCell>
+                        <TableCell>{`"${tableInfo.name}" ${tableInfo.type} ${
+                          tableInfo.notnull ? "NOT NULL" : ""
+                        }`}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
