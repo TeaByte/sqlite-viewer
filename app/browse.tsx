@@ -53,7 +53,7 @@ export default function Browse(props: BrowseProps) {
           </Select>
         )}
       </div>
-      <div className="mt-3 h-[420px] overflow-auto">
+      <div className="mt-2 h-[420px] overflow-auto">
         {selectedTable && records[selectedTable] && (
           <Table>
             <TableHeader>
@@ -70,8 +70,11 @@ export default function Browse(props: BrowseProps) {
                 <TableRow key={rowIndex}>
                   {Object.keys(records[selectedTable]).map(
                     (column, columnIndex) => (
-                      <TableCell key={columnIndex}>
-                        {records[selectedTable][column][rowIndex]}
+                      <TableCell
+                        key={columnIndex}
+                        className="max-w-[150px] truncate hover:max-w-full"
+                      >
+                        <span>{records[selectedTable][column][rowIndex]}</span>
                       </TableCell>
                     )
                   )}

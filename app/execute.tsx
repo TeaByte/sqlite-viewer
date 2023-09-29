@@ -56,13 +56,11 @@ export default function ExecuteSQL({ table }: { table: string }) {
         {typeof result === "string" ? (
           <p>{result}</p>
         ) : result instanceof Array ? (
-          <Table className="table-auto">
+          <Table>
             <TableHeader>
               <TableRow>
                 {Object.keys(result[0]).map((key) => (
-                  <TableHead key={key} className="border px-4 py-2">
-                    {key}
-                  </TableHead>
+                  <TableHead key={key}>{key}</TableHead>
                 ))}
               </TableRow>
             </TableHeader>
@@ -70,7 +68,10 @@ export default function ExecuteSQL({ table }: { table: string }) {
               {result.map((row, index) => (
                 <TableRow key={index}>
                   {Object.values(row).map((value, index) => (
-                    <TableCell key={index} className="border px-4 py-2">
+                    <TableCell
+                      key={index}
+                      className="max-w-[150px] truncate hover:max-w-full"
+                    >
                       {value}
                     </TableCell>
                   ))}
