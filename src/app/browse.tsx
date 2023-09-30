@@ -31,7 +31,7 @@ export default function Browse(props: BrowseProps) {
   const { setSelectedTable, tables, selectedTable, records } = props;
   return (
     <div className="w-full">
-      <div className="px-2">
+      <div className="px-2 flex gap-2 items-center">
         {selectedTable && (
           <Select
             value={selectedTable}
@@ -52,6 +52,13 @@ export default function Browse(props: BrowseProps) {
             </SelectContent>
           </Select>
         )}
+        <span className="text-sm">
+          {(selectedTable &&
+            records[selectedTable][Object.keys(records[selectedTable])[0]]
+              ?.length) ||
+            0}{" "}
+          Rows
+        </span>
       </div>
       <div className="mt-2 h-[420px] overflow-auto">
         {selectedTable && records[selectedTable] && (

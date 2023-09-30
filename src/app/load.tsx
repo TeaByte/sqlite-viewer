@@ -55,7 +55,6 @@ export default function Load({ path }: { path: string }) {
     setTables(tableNames);
     setRecords(dbColumns);
     setSelectedTable(tableNames[0]);
-    console.log(dbColumns);
   };
 
   return (
