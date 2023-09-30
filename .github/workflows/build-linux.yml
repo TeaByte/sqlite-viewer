@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          submodules: recursive  # Ensure submodules are fetched
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
 
       - name: Install Rust
         run: |
@@ -19,9 +26,12 @@ jobs:
           export PATH="$HOME/.cargo/bin:$PATH"
           source $HOME/.cargo/env
 
-      - name: Build Tauri App
+      - name: Install Tauri Bundler
         run: |
           cargo install tauri-bundler
+
+      - name: Build Tauri App
+        run: |
           cargo tauri build
 
       - name: Upload Artifact
