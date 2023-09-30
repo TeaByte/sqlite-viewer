@@ -13,10 +13,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set Up Rust
-        uses: actions/setup-rust@v1
-        with:
-          rust-version: stable
+      - name: Install Rust
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          export PATH="$HOME/.cargo/bin:$PATH"
+          source $HOME/.cargo/env
 
       - name: Build Tauri App
         run: |
