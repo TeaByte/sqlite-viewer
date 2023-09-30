@@ -68,10 +68,7 @@ export default function ExecuteSQL({ table }: { table: string }) {
               {result.map((row, index) => (
                 <TableRow key={index}>
                   {Object.values(row).map((value, index) => (
-                    <TableCell
-                      key={index}
-                      className="max-w-[150px] truncate hover:max-w-full"
-                    >
+                    <TableCell key={index} className="max-w-[150px] truncate">
                       {value}
                     </TableCell>
                   ))}

@@ -19,7 +19,7 @@ import {
 export default function Structure({ tablesInfo }: { tablesInfo: TableInfos }) {
   return (
     <div className="w-full">
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="multiple" className="w-full">
         {Object.keys(tablesInfo).map((table, index) => (
           <div key={index} className="flex flex-col">
             <AccordionItem value={table}>

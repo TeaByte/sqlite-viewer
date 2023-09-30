@@ -1,11 +1,11 @@
-SQLite Viewer GUI Program written in Rust using Tauri + NextJS
+# SQLite Viewer V0.4
 
 [ TODO LIST ]
 
 - [ ] Make a web version ( if possible )
 - [ ] Add Linux and MacOS Builds
 - [ ] Handle Sqlite with password
-- [ ] Render performance for big sqlite files
+- [x] Render performance for big sqlite files
 - [x] Execute SQL command tab
 - [x] Schema Generator
 - [ ] Sort by column
@@ -17,23 +17,19 @@ SQLite Viewer GUI Program written in Rust using Tauri + NextJS
 
 **1- Browse All Your SQLite Tables.**
 
-![photo](https://i.ibb.co/SBzVnFX/Browse.png)
+![photo](https://i.ibb.co/ZYJSDwx/brow.png)
 
 **2- Database Structure View.**
 
-![photo](https://i.ibb.co/8zGSBHN/Struct.png)
+![photo](https://i.ibb.co/fCGJVMk/stuct.png)
 
 **3- Execute SQL Commands**
 
-![photo](https://i.ibb.co/SnTXqwy/execute.png)
+![photo](https://i.ibb.co/JnMy5cH/execute.png)
 
-**4- Errors are easy to recognize**
+**4- Light and Dark mode**
 
-![photo](https://i.ibb.co/Xtb0pZT/error.png)
-
-**5- Light and Dark mode**
-
-![photo](https://i.ibb.co/XpC9Mwm/image.png)
+![photo](https://i.ibb.co/tP84yCS/light.png)
 
 ##
 

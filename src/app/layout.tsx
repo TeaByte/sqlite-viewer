@@ -26,10 +26,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <footer className="p-4 fixed bottom-0 w-full bg-background">
+          <footer className="p-4 fixed bottom-0 w-full bg-background border-t border-secondary">
             <div className="flex justify-between items-center">
               <Toggle />
-              SQLite Viewer V0.3
+              <span className="hover:animate-bounce animate-pulse">
+                SQLite Viewer V0.4
+              </span>
             </div>
           </footer>
         </ThemeProvider>

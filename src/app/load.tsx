@@ -59,33 +59,37 @@ export default function Load({ path }: { path: string }) {
 
   return (
     <div className="w-full">
-      <Tabs defaultValue="structure">
-        <TabsList className="w-full flex gap-2">
-          <TabsTrigger value="structure" className="grow">
-            Structure
-          </TabsTrigger>
-          <TabsTrigger value="browse" className="grow">
-            Browse Data
-          </TabsTrigger>
-          <TabsTrigger value="execute" className="grow">
-            Execute SQL
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="structure">
-          <Structure tablesInfo={tablesInfo} />
-        </TabsContent>
-        <TabsContent value="browse">
-          <Browse
-            tables={tables}
-            selectedTable={selectedTable}
-            records={records}
-            setSelectedTable={setSelectedTable}
-          />
-        </TabsContent>
-        <TabsContent value="execute">
-          <ExecuteSQL table={tables[0]} />
-        </TabsContent>
-      </Tabs>
+      {selectedTable ? (
+        <Tabs defaultValue="structure">
+          <TabsList className="w-full flex gap-2">
+            <TabsTrigger value="structure" className="grow">
+              Structure
+            </TabsTrigger>
+            <TabsTrigger value="browse" className="grow">
+              Browse Data
+            </TabsTrigger>
+            <TabsTrigger value="execute" className="grow">
+              Execute SQL
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="structure">
+            <Structure tablesInfo={tablesInfo} />
+          </TabsContent>
+          <TabsContent value="browse">
+            <Browse
+              tables={tables}
+              selectedTable={selectedTable}
+              records={records}
+              setSelectedTable={setSelectedTable}
+            />
+          </TabsContent>
+          <TabsContent value="execute">
+            <ExecuteSQL table={tables[0]} />
+          </TabsContent>
+        </Tabs>
+      ) : (
+        <h1 className="text-2xl w-full mt-20 text-center">Loading Data..</h1>
+      )}
     </div>
   );
 }

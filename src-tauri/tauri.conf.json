@@ -63,8 +63,8 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
-        "minHeight": 600,
+        "height": 630,
+        "minHeight": 630,
         "resizable": true,
         "title": "SQLite Viewer",
         "width": 800,
