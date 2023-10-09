@@ -1,16 +1,16 @@
-# SQLite Viewer V0.4
+# SQLite Viewer V0.5
 
 [ TODO LIST ]
 
 - [ ] Add Linux and MacOS Builds
 - [ ] Handle SQLite with password
-- [x] Render performance for big sqlite files
+- [ ] Sort by column
+- [x] Render performance for big SQLite files
 - [x] Execute SQL command tab
 - [x] Schema Generator
-- [ ] Sort by column
 - [x] Add themes
 
-##
+---
 
 ### Features
 
@@ -30,7 +30,7 @@
 
 ![photo](https://i.ibb.co/tP84yCS/light.png)
 
-##
+---
 
 1. **Clone the Repository**
 
