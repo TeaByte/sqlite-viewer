@@ -41,8 +41,7 @@ export default function Home() {
           >
             Select Database
           </button>
-          <p>SQLite Viewer GUI Program written in Rust using Tauri + NextJS</p>
-          <p>I dont know what to put in this place!</p>
+          <p>Leave a Start on GitHub ⭐</p>
         </div>
       )}
     </main>

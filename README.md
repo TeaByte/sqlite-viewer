@@ -2,9 +2,8 @@
 
 [ TODO LIST ]
 
-- [ ] Make a web version ( if possible )
 - [ ] Add Linux and MacOS Builds
-- [ ] Handle Sqlite with password
+- [ ] Handle SQLite with password
 - [x] Render performance for big sqlite files
 - [x] Execute SQL command tab
 - [x] Schema Generator

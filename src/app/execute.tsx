@@ -55,28 +55,30 @@ export default function ExecuteSQL({ table }: { table: string }) {
         </button>
         {typeof result === "string" ? (
           <p>{result}</p>
-        ) : result instanceof Array ? (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {Object.keys(result[0]).map((key) => (
-                  <TableHead key={key}>{key}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {result.map((row, index) => (
-                <TableRow key={index}>
-                  {Object.values(row).map((value, index) => (
-                    <TableCell key={index} className="max-w-[150px] truncate">
-                      {value}
-                    </TableCell>
+        ) : (
+          result instanceof Array && (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  {Object.keys(result[0]).map((key) => (
+                    <TableHead key={key}>{key}</TableHead>
                   ))}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        ) : null}
+              </TableHeader>
+              <TableBody>
+                {result.map((row, index) => (
+                  <TableRow key={index}>
+                    {Object.values(row).map((value, index) => (
+                      <TableCell key={index} className="max-w-[150px] truncate">
+                        {value}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )
+        )}
       </form>
     </div>
   );

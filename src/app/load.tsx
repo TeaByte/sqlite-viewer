@@ -1,7 +1,9 @@
 "use client";
 
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { Columns, TableInfos, TableInfo } from "@/types";
 import { useState, useEffect } from "react";
+import Toggle from "@/components/theme/toggle";
 
 import { invoke } from "@tauri-apps/api/tauri";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,7 +16,7 @@ export default function Load({ path }: { path: string }) {
   const [records, setRecords] = useState<Columns>({});
   const [tables, setTables] = useState<string[]>([]);
   const [tablesInfo, setTablesInfo] = useState<TableInfos>({});
-  const [selectedTable, setSelectedTable] = useState<string | null>(null);
+  const [selectedTable, setSelectedTable] = useState<string>("");
 
   useEffect(() => {
     onSelectedDatabase();
@@ -71,6 +73,7 @@ export default function Load({ path }: { path: string }) {
             <TabsTrigger value="execute" className="grow">
               Execute SQL
             </TabsTrigger>
+            <Toggle />
           </TabsList>
           <TabsContent value="structure">
             <Structure tablesInfo={tablesInfo} />
@@ -88,7 +91,10 @@ export default function Load({ path }: { path: string }) {
           </TabsContent>
         </Tabs>
       ) : (
-        <h1 className="text-2xl w-full mt-20 text-center">Loading Data..</h1>
+        <div className="flex gap-2 items-center justify-center mt-20">
+          <h1 className="text-2xl">Reading Content</h1>
+          <ReloadIcon className="animate-spin w-8 h-8" />
+        </div>
       )}
     </div>
   );

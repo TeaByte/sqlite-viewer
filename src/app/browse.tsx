@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/table";
 
 interface BrowseProps {
-  setSelectedTable: (value: SetStateAction<string | null>) => void;
+  setSelectedTable: (value: SetStateAction<string>) => void;
   tables: string[];
-  selectedTable: string | null;
+  selectedTable: string;
   records: Columns;
 }
 
@@ -38,7 +38,6 @@ export default function Browse(props: BrowseProps) {
   const endIndex = startIndex + ROWS_PER_PAGE;
 
   const totalPages = Math.ceil(
-    // @ts-ignore
     records[selectedTable]?.[Object.keys(records[selectedTable])[0]]?.length /
       ROWS_PER_PAGE
   );
@@ -53,7 +52,10 @@ export default function Browse(props: BrowseProps) {
         {selectedTable && (
           <Select
             value={selectedTable}
-            onValueChange={(table: string) => setSelectedTable(table)}
+            onValueChange={(table: string) => {
+              setCurrentPage(1);
+              setSelectedTable(table);
+            }}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Table" />
@@ -77,51 +79,63 @@ export default function Browse(props: BrowseProps) {
             0}{" "}
           Rows
         </span>
+        <span className="text-sm">
+          ( Page {currentPage} of {totalPages} )
+        </span>
       </div>
-      <div className="mt-2 h-[420px] overflow-auto">
-        {selectedTable && records[selectedTable] && (
-          <>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  {Object.keys(records[selectedTable]).map((column, index) => (
-                    <TableHead key={index}>{column}</TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {records[selectedTable][Object.keys(records[selectedTable])[0]]
-                  .slice(startIndex, endIndex)
-                  .map((_, rowIndex) => (
-                    <TableRow key={rowIndex}>
-                      {Object.keys(records[selectedTable]).map(
-                        (column, columnIndex) => (
-                          <TableCell
-                            key={columnIndex}
-                            className="max-w-[150px] truncate"
-                          >
-                            <span>
-                              {
-                                records[selectedTable][column][
-                                  rowIndex + startIndex
-                                ]
-                              }
-                            </span>
-                          </TableCell>
-                        )
-                      )}
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </>
+      <section className="flex flex-col">
+        <div className="mt-2 overflow-auto mb-[55px]">
+          {selectedTable && records[selectedTable] && (
+            <>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    {Object.keys(records[selectedTable]).map(
+                      (column, index) => (
+                        <TableHead key={index}>{column}</TableHead>
+                      )
+                    )}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {records[selectedTable][
+                    Object.keys(records[selectedTable])[0]
+                  ]
+                    .slice(startIndex, endIndex)
+                    .map((_, rowIndex) => (
+                      <TableRow key={rowIndex}>
+                        {Object.keys(records[selectedTable]).map(
+                          (column, columnIndex) => (
+                            <TableCell
+                              key={columnIndex}
+                              className="max-w-[150px] truncate"
+                            >
+                              <span>
+                                {
+                                  records[selectedTable][column][
+                                    rowIndex + startIndex
+                                  ]
+                                }
+                              </span>
+                            </TableCell>
+                          )
+                        )}
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </>
+          )}
+        </div>
+
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handleChangePage}
+          />
         )}
-      </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handleChangePage}
-      />
+      </section>
     </div>
   );
 }
@@ -137,11 +151,12 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  // @ts-ignore
-  const pageNumbers = [...Array(totalPages).keys()].map((num) => num + 1);
-
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
   return (
-    <ul className="flex overflow-x-scroll">
+    <ul className="flex overflow-x-scroll fixed bottom-0 w-full">
       {pageNumbers.map((page) => (
         <li
           key={page}
