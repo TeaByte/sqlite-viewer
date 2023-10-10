@@ -114,6 +114,6 @@ pub fn convert(value: Value) -> String {
         Value::Integer(v) => v.to_string(),
         Value::Real(v) => v.to_string(),
         Value::Text(v) => v.to_string(),
-        Value::Blob(_) => String::from("Blob"),
+        Value::Blob(_) => String::from("<Blob Object>"),
     }
 }
